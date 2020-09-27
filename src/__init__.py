@@ -15,7 +15,7 @@ def home():
 
 @app.route("/users", methods=["GET"])
 def users():
-    users = requests.get(f"http://{os.getenv('HOST')}:{os.getenv('API_PORT')}/users").json()["users"]
+    users = requests.get(f"http://{os.getenv('API_HOST')}:{os.getenv('API_PORT')}/users").json()["users"]
 
     return render_template("users.html", users=users)
 
