@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, request
+from flask import Flask, render_template, redirect, request, url_for
 from dotenv import load_dotenv
 import os
 import requests
@@ -10,19 +10,24 @@ app = Flask(__name__)
 
 @app.route("/", methods=["GET"])
 def home():
-    return "Welcome to Smag :)"
+    return render_template("index.html")
 
 
-@app.route("/users", methods=["GET"])
-def users():
-    users = requests.get(f"http://{os.getenv('API_HOST')}:{os.getenv('API_PORT')}/users").json()["users"]
+@app.route("/leaderboard", methods=["GET"])
+def leaderboard():
+    return render_template("leaderboard.html")
 
-    return render_template("users.html", users=users)
+
+@app.route("/members", methods=["GET"])
+def members():
+    members = requests.get(f"http://{os.getenv('API_HOST')}:{os.getenv('API_PORT')}/members").json()["members"]
+
+    return render_template("members.html", members=members)
 
 
 @app.errorhandler(404)
 def not_found(e):
-    return "Invalid page"
+    return render_template("404.html")
 
 
 if __name__ == "__main__":
