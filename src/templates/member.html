@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Smag | Members</title>
+		<title>Smag | {{ member["name"] }}</title>
 
 		<link rel="icon" type="image/png" href="{{ url_for('static', filename='images/smag.png') }}">
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
@@ -21,9 +21,7 @@
 		</nav>
 
 		<div class="row">
-		{% for member in members %}
-		<a href="{{ url_for('member', member=member.name) }}">
-			<div class="col-sm-6 col-md-4">
+			<div class="col-sm-12 col-md-12">
 				<div class="thumbnail">
 					<img src="{{ member.picture }}" alt="{{ member.name }}'s picture">
 					<div class="caption">
@@ -32,8 +30,6 @@
 					</div>
 				</div>
 			</div>
-		</a>
-		{% endfor %}
 		</div>
 	</body>
 </html>

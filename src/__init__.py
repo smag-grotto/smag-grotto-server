@@ -25,6 +25,16 @@ def members():
     return render_template("members.html", members=members)
 
 
+@app.route("/members/<member>", methods=["GET"])
+def member(member):
+    member = requests.get(f"http://{os.getenv('API_HOST')}:{os.getenv('API_PORT')}/members/{member}").json()
+
+    if "message" in member:
+        return member["message"]
+
+    return render_template("member.html", member=member)
+
+
 @app.errorhandler(404)
 def not_found(e):
     return render_template("404.html")
